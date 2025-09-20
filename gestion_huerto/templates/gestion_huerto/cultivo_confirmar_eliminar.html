@@ -1,0 +1,15 @@
+<!-- gestion_huerto/templates/gestion_huerto/cultivo_confirmar_eliminar.html -->
+{% extends "base.html" %}
+{% block title %}Eliminar{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <p>¿Eliminar “{{ object }}”?</p>
+    <form method="post" class="d-flex gap-2">
+      {% csrf_token %}
+      <button class="btn btn-danger" type="submit">Sí, eliminar</button>
+      <a href="{% url 'gestion_huerto:lista' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

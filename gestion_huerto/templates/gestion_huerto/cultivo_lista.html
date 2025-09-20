@@ -1,0 +1,54 @@
+<!-- gestion_huerto/templates/gestion_huerto/cultivo_lista.html -->
+{% extends "base.html" %}
+{% block title %}Cultivos{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">Lista de Cultivos</h1>
+
+{% if cultivos %}
+<div class="row">
+  <div class="col-lg-8">
+    <table class="table table-striped align-middle">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Fecha Siembra</th>
+          <th>Estado</th>
+          <th>Sector</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in cultivos %}
+        <tr>
+          <td>{{ c.nombre }}</td>
+          <td>{{ c.fecha_siembra }}</td>
+          <td>{{ c.get_estado_display }}</td>
+          <td>{{ c.sector.nombre }}</td>
+          <td class="text-nowrap">
+            <a class="btn btn-sm btn-outline-primary" href="{% url 'gestion_huerto:editar' c.pk %}">Editar</a>
+            <a class="btn btn-sm btn-outline-danger" href="{% url 'gestion_huerto:eliminar' c.pk %}">Eliminar</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-header">Sectores</div>
+      <ul class="list-group list-group-flush">
+        {% for s in sectores %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          {{ s.nombre }} <span class="badge bg-success rounded-pill">{{ s.total }}</span>
+        </li>
+        {% empty %}
+        <li class="list-group-item">Sin sectores</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="alert alert-info">No hay cultivos registrados</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,14 @@
+<!-- gestion_huerto/templates/gestion_huerto/cultivo_form.html -->
+{% extends "base.html" %}
+{% block title %}Formulario{% endblock %}
+{% block content %}
+<h1 class="h4 mb-3">{{ view.object|default_if_none:"Nuevo Cultivo" }}</h1>
+<form method="post" class="card card-body gap-3">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <div>
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a href="{% url 'gestion_huerto:lista' %}" class="btn btn-secondary">Volver</a>
+  </div>
+</form>
+{% endblock %}
